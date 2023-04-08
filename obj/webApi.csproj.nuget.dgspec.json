@@ -10,11 +10,11 @@
         "projectUniqueName": "/run/media/devilskeyDev/Backups/vscode/cScharp/webApi/webApi.csproj",
         "projectName": "webApi",
         "projectPath": "/run/media/devilskeyDev/Backups/vscode/cScharp/webApi/webApi.csproj",
-        "packagesPath": "/home/devilskeyDev/.nuget/packages/",
+        "packagesPath": "/root/.nuget/packages/",
         "outputPath": "/run/media/devilskeyDev/Backups/vscode/cScharp/webApi/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/devilskeyDev/.nuget/NuGet/NuGet.Config"
+          "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -57,10 +57,6 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
-            },
-            "Swashbuckle.AspNetCore.SwaggerUI": {
-              "target": "Package",
-              "version": "[6.5.0, )"
             }
           },
           "imports": [
@@ -77,10 +73,6 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.15, 6.0.15]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.linux-x64",
               "version": "[6.0.15, 6.0.15]"
             },
             {

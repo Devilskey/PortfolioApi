@@ -1,7 +1,5 @@
 ﻿namespace webApi.Types
 {
-
-
     public class PostType
     {
         public string Token { get; set; }

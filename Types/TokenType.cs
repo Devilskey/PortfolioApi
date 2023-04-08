@@ -1,6 +1,6 @@
 ﻿namespace webApi.Types
 {
-    public class TokenType
+    public class OldToken
     {
         internal static byte[] time;
         internal static byte[] key;

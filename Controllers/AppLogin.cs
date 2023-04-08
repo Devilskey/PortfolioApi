@@ -3,6 +3,8 @@ using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 using webApi.Managers;
 using webApi.Types;
+using webApi.Security;
+using MySql.Data.MySqlClient;
 
 namespace webApi.Controllers
 {
@@ -10,21 +12,22 @@ namespace webApi.Controllers
     [Route("[controller]")]
     public class AppLogin : ControllerBase
     {
-        
         public static AdminData LoginData = new AdminData();
-        public static int GiveId = 1;
-        private static IMemoryCache cache;
-
-        public AppLogin() { }
 
         [HttpPost]
-        public string PostCommand(AdminLogin adminLoginData)
+        public string LoginCommand(AdminData adminLoginData)
         {
-            string query = $"SELECT AdminName, AdminPassword FROM adminlogin WHERE AdminName = '{adminLoginData.Username}';";
+            string query = $"SELECT AdminName, AdminPassword FROM admin WHERE AdminName=@AdminName;";
             string json = string.Empty;
+            
+            MySqlCommand mysqlCommand = new MySqlCommand();
+            mysqlCommand.CommandText = query;
+
+            mysqlCommand.Parameters.AddWithValue("@AdminName", adminLoginData.AdminName);
+
             using (DatabaseManager databaseManger = new DatabaseManager())
             {
-                json = databaseManger.Select(query);
+                json = databaseManger.Select(mysqlCommand);
                 json = json.Replace("[", "");
                 json = json.Replace("]", "");
             }
@@ -32,44 +35,29 @@ namespace webApi.Controllers
             try
             {
                LoginData = JsonConvert.DeserializeObject<AdminData>(json);
-            }catch(Exception ex) { return "No Access granted"; }
-
-            if (LoginData == null) return "User not found";
-
-            if (LoginData.AdminName != adminLoginData.Username || LoginData.AdminPassword != adminLoginData.Password)
-                return "no Access granted";
-
-            TokenManager.TokenGenerator();
-
-            return TokenType.token;
-        }
-
-        [HttpPost]
-        public string LoginCommand(AdminLogin adminLoginData)
-        {
-            string query = $"SELECT AdminName, AdminPassword FROM adminlogin WHERE AdminName = '{adminLoginData.Username}';";
-            string json = string.Empty;
-            using (DatabaseManager databaseManger = new DatabaseManager())
-            {
-                json = databaseManger.Select(query);
-                json = json.Replace("[", "");
-                json = json.Replace("]", "");
+            }
+            catch(Exception ex) 
+            { 
+                return $"No Access granted: {ex}";
             }
 
-            try
+            if (LoginData == null)
+            { 
+                return "User not found";
+            }
+
+            string hashedLoginPassword = EncryptionHandler.StringHashPassword(adminLoginData.AdminPassword);
+
+            if (LoginData.AdminName != adminLoginData.AdminName || LoginData.AdminPassword != hashedLoginPassword)
             {
-               LoginData = JsonConvert.DeserializeObject<AdminData>(json);
-            }catch(Exception ex) { return "No Access granted"; }
-
-            if (LoginData == null) return "User not found";
-
-            if (LoginData.AdminName != adminLoginData.Username || LoginData.AdminPassword != adminLoginData.Password)
                 return "no Access granted";
+            }
+
+            Console.WriteLine("Loged in");
 
             TokenManager.TokenGenerator();
 
-            return TokenType.token;
+            return OldToken.token;
         }
-
     }
 }

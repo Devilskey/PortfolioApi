@@ -6917,12 +6917,11 @@
       "Microsoft.AspNet.WebApi.Cors >= 5.2.9",
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.17.0",
       "MySql.Data >= 8.0.32",
-      "Swashbuckle.AspNetCore >= 6.5.0",
-      "Swashbuckle.AspNetCore.SwaggerUI >= 6.5.0"
+      "Swashbuckle.AspNetCore >= 6.5.0"
     ]
   },
   "packageFolders": {
-    "/home/devilskeyDev/.nuget/packages/": {}
+    "/root/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
@@ -6930,11 +6929,11 @@
       "projectUniqueName": "/run/media/devilskeyDev/Backups/vscode/cScharp/webApi/webApi.csproj",
       "projectName": "webApi",
       "projectPath": "/run/media/devilskeyDev/Backups/vscode/cScharp/webApi/webApi.csproj",
-      "packagesPath": "/home/devilskeyDev/.nuget/packages/",
+      "packagesPath": "/root/.nuget/packages/",
       "outputPath": "/run/media/devilskeyDev/Backups/vscode/cScharp/webApi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/devilskeyDev/.nuget/NuGet/NuGet.Config"
+        "/root/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -6977,10 +6976,6 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.5.0, )"
-          },
-          "Swashbuckle.AspNetCore.SwaggerUI": {
-            "target": "Package",
-            "version": "[6.5.0, )"
           }
         },
         "imports": [
@@ -6997,10 +6992,6 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.15, 6.0.15]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.linux-x64",
             "version": "[6.0.15, 6.0.15]"
           },
           {

@@ -44,18 +44,15 @@ namespace webApi.Managers
                 server = "127.0.0.1";
                 databaseName = "c49078dataapi";
             }
-
+            
             connectionString = $"server={server};port=3306;uid={username};pwd={password};database={databaseName};";
             connection = new MySqlConnection(connectionString);
             connection.Open();
             Worked = connection.State.ToString();
-
         }
 
-        public string Select(string query)
+        public string Select(MySqlCommand SqlCommand)
         {
-            SqlCommand = new MySqlCommand();
-            SqlCommand.CommandText = query;
             string json = string.Empty;
             SqlCommand.Connection = connection;
             try
@@ -69,50 +66,44 @@ namespace webApi.Managers
             {
                 json = $"Json Error {ex} : {Worked}";
             }
-
             return json;
         }
 
-        public void Insert(string query)
+        public void Insert(MySqlCommand SqlCommand)
         {
-            SqlCommand = new MySqlCommand();
             SqlCommand.Connection = connection;
-            SqlCommand.CommandText = query;
             try
             {
-
                 SqlCommand.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
             }
         }
-        public void Delete(string query)
+        public void Delete(MySqlCommand SqlCommand)
         {
-            SqlCommand = new MySqlCommand();
             SqlCommand.Connection = connection;
-            SqlCommand.CommandText = query;
             try
             {
                 SqlCommand.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
             }
         }
-        public void Update(string query)
+        public void Update(MySqlCommand SqlCommand)
         {
-            SqlCommand = new MySqlCommand();
             SqlCommand.Connection = connection;
-            SqlCommand.CommandText = query;
             try
             {
                 SqlCommand.ExecuteNonQuery();
             }
             catch (Exception ex)
-            {}
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public string sqlReaderToJson(MySqlDataReader reader)
@@ -133,10 +124,9 @@ namespace webApi.Managers
 
         public void SendImport(string query)
         {
-
-            SqlCommand = new MySqlCommand();
-            SqlCommand.Connection = connection;
+            MySqlCommand SqlCommand = new MySqlCommand();
             SqlCommand.CommandText = query;
+            SqlCommand.Connection = connection;
             try
             {
                 SqlCommand.ExecuteNonQuery();

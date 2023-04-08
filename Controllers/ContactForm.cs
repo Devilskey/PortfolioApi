@@ -6,27 +6,28 @@ using webApi.Types;
 
 namespace webApi.Controllers
 {
-    [Route("Site/[controller]")]
     [ApiController]
+    [Route("Site/[controller]")]
     public class ContactForm : ControllerBase
     {
         [HttpPost]
         public ActionResult<contactFormType> SendContactmessage(contactFormType contactData)
         {
-            MailMessage mail = new MailMessage();
-            mail.To.Add("ecolampjeb@gmail.com");
-            mail.From = new MailAddress("noreply@devilskey.eu");
-            mail.Subject = contactData.Subject;
+            ContactFormManager contactForm = new ContactFormManager();
 
+            MailMessage mail = new MailMessage();
+            mail.To.Add(contactForm.ToEmail);
+            mail.From = new MailAddress(contactForm.FromMail);
+            mail.Subject = contactData.Subject;
 
             mail.Body = $" From {contactData.Name},  {contactData.Body}";
 
             mail.IsBodyHtml = true;
             using (SmtpClient smtp = new SmtpClient())
             {
-                smtp.Host = "webreus.email"; //Or Your SMTP Server Address
+                smtp.Host = contactForm.SMPTserver; //Or Your SMTP Server Address
                 smtp.Credentials = new System.Net.NetworkCredential
-                     ("noreply@devilskey.eu", "Test?1234");
+                     (contactForm.FromMail, contactForm.FromMailPassword);
                 //Or your Smtp Email ID and Password
                 try
                 {

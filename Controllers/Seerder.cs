@@ -4,8 +4,8 @@ using webApi.Seeder;
 
 namespace webApi.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class Seeder : ControllerBase
     {
         [HttpGet]

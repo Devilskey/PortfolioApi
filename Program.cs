@@ -1,9 +1,3 @@
-using Microsoft.AspNetCore.Hosting.Server;
-using Newtonsoft.Json;
-using System.Diagnostics;
-using webApi.Managers;
-using webApi.Seeder;
-
 namespace webApi
 {
     public class Program
