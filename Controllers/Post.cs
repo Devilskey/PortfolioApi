@@ -13,7 +13,7 @@ namespace webApi.Controllers
         [HttpGet]
         public string GetCommand()
         {
-            string query = $"SELECT * FROM post;";
+            string query = $"SELECT postId, PostTitle FROM post;";
             string json = string.Empty;
             using (DatabaseManager databaseManager = new DatabaseManager())
             {
@@ -24,20 +24,16 @@ namespace webApi.Controllers
             return json;
         }
         [HttpPost]
-        public List<PostType> PostCommand(PostType postData)
+        public string PostCommand(PostType postData)
         {
-            string query = $"SELECT * FROM post WHERE postId = {postData.PostId};";
+            string query = $"SELECT PostTitle, PostContent, thumbnail FROM post WHERE postId = {postData.postId};";
             string json = string.Empty;
             using (DatabaseManager databaseManager = new DatabaseManager())
             {
                 json = databaseManager.Select(query);
             }
-            if (json == "") 
-                return new List<PostType>();
 
-            List<PostType> post = JsonConvert.DeserializeObject<List<PostType>>(json);
-
-            return post;
+            return json;
         }
     }
 
@@ -79,10 +75,23 @@ namespace webApi.Controllers
         {
             if (postData.Token == TokenType.token && TokenType.token != "")
             {
-                string query = $"DELETE FROM post WHERE postId = {postData.PostId}";
+                string query = $"DELETE FROM post WHERE postId = {postData.postId}";
                 using (DatabaseManager databaseManager = new DatabaseManager())
                     databaseManager.Delete(query);
                 return "Deleted";
+            }
+            return $"No token No access";
+        }
+
+        [HttpPut]
+        public string EditPost(PostType postData)
+        {
+            if (postData.Token == TokenType.token && TokenType.token != "")
+            {
+                string query = $"UPDATE post SET `PostTitle`='{postData.PostTitle}', `PostContent`='{postData.PostContent}', `thumbnail`='{postData.thumbnail}' WHERE `postId`='{postData.postId}';";
+                using (DatabaseManager databaseManager = new DatabaseManager())
+                    databaseManager.Delete(query);
+                return $"Updated {postData.postId}";
             }
             return $"No token No access";
         }

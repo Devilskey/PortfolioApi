@@ -1,13 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting.Server;
-using MySql.Data.MySqlClient;
-using System;
-using System.Security.Cryptography;
-using System.Net;
+﻿using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
-using webApi.Types;
-using MySqlX.XDevAPI.Common;
-using static System.Net.WebRequestMethods;
-using System.Data;
 
 namespace webApi.Managers
 {
@@ -45,6 +37,14 @@ namespace webApi.Managers
             server = Environment.GetEnvironmentVariable("ServerDb");
             databaseName = Environment.GetEnvironmentVariable("DatabaseName");
 
+            if(username == "" || password == "" || server == "" || databaseName == "")
+            {
+                username = "root";
+                password = "password";
+                server = "127.0.0.1";
+                databaseName = "c49078dataapi";
+            }
+
             connectionString = $"server={server};port=3306;uid={username};pwd={password};database={databaseName};";
             connection = new MySqlConnection(connectionString);
             connection.Open();
@@ -54,8 +54,6 @@ namespace webApi.Managers
 
         public string Select(string query)
         {
-
-
             SqlCommand = new MySqlCommand();
             SqlCommand.CommandText = query;
             string json = string.Empty;
