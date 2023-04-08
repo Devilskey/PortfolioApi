@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\ecola\source\repos\WebPortFolioApi\webApi\bin\Release\net6.0\publish\publish\</_PublishTargetUrl>
+    <History>True|2022-12-15T10:47:00.9130060Z;True|2022-12-15T11:41:12.5570295+01:00;True|2022-12-15T11:41:07.2335740+01:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>
