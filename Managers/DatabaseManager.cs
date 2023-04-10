@@ -42,9 +42,12 @@ namespace webApi.Managers
                 username = "root";
                 password = "password";
                 server = "127.0.0.1";
-                databaseName = "c49078dataapi";
+                databaseName = "";
+                System.Console.WriteLine("No Env found");
             }
+
             
+            System.Console.WriteLine($"server={server};port=3306;uid={username};pwd={password};database={databaseName};");
             connectionString = $"server={server};port=3306;uid={username};pwd={password};database={databaseName};";
             connection = new MySqlConnection(connectionString);
             connection.Open();

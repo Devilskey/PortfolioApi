@@ -61,7 +61,7 @@ namespace webApi.Controllers
             if (admin.token == OldToken.token && OldToken.token != ""){
                 string HashedPassword = EncryptionHandler.StringHashPassword(admin.AdminPassword);
 
-                string query = $"UPDATE `admin` SET `AdminName`=@AdminName,`AdminPassword`=@AdminPassword,`AdminPhoneNumber`=@AdminPhoneNumber' WHERE `AdminId`=@AdminId;";
+                string query = $"UPDATE `admin` SET `AdminName`=@AdminName,`AdminPassword`=@AdminPassword,`AdminPhoneNumber`=@AdminPhoneNumber WHERE `AdminId`=@AdminId;";
                 
                 MySqlCommand mysqlCommand = new MySqlCommand();
                 mysqlCommand.CommandText = query;
