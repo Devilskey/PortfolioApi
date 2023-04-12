@@ -26,7 +26,6 @@ namespace webApi
 
             // Configure the HTTP request pipeline.
             app.UseSwagger();
-            app.UseSwaggerUI();
 
             builder.WebHost.UseUrls("http://*:5244");
             app.UseCors("anyCors");
