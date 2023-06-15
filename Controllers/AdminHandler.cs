@@ -31,7 +31,7 @@ public class AdminApi : ControllerBase
         mysqlCommand.Parameters.AddWithValue("@AdminPassword", HashedPassword);
         mysqlCommand.Parameters.AddWithValue("@AdminPhoneNumber", admin.AdminPhoneNumber);
 
-        using (DatabaseHandler databaseManager = new()){
+        using (DatabaseMysqlHandler databaseManager = new()){
             databaseManager.EditDatabase(mysqlCommand);
         }
         return "inserted into";
@@ -54,7 +54,7 @@ public class AdminApi : ControllerBase
 
         mysqlCommand.Parameters.AddWithValue("@AdminId", admin.AdminId);
     
-        using (DatabaseHandler databaseManager = new DatabaseHandler()){
+        using (DatabaseMysqlHandler databaseManager = new DatabaseMysqlHandler()){
             databaseManager.EditDatabase(mysqlCommand);
         }
         return "Admin Deleted";
@@ -82,7 +82,7 @@ public class AdminApi : ControllerBase
         mysqlCommand.Parameters.AddWithValue("@AdminPhoneNumber", admin.AdminPhoneNumber);
         mysqlCommand.Parameters.AddWithValue("@AdminId", admin.AdminId);
 
-        using (DatabaseHandler databaseManager = new DatabaseHandler()){
+        using (DatabaseMysqlHandler databaseManager = new DatabaseMysqlHandler()){
             databaseManager.EditDatabase(mysqlCommand);
         }
         return "admin Updated";
@@ -102,7 +102,7 @@ public class AdminApi : ControllerBase
         MySqlCommand mySqlCommand = new MySqlCommand();
         mySqlCommand.CommandText = query;
 
-        using (DatabaseHandler databaseManager = new DatabaseHandler())
+        using (DatabaseMysqlHandler databaseManager = new DatabaseMysqlHandler())
         {
             json = databaseManager.Select(mySqlCommand);
         }

@@ -18,7 +18,7 @@ public class Post : ControllerBase
         string json = string.Empty;
         MySqlCommand mysqlCommand = new MySqlCommand();
         mysqlCommand.CommandText = query;
-        using (DatabaseHandler databaseManager = new DatabaseHandler())
+        using (DatabaseMysqlHandler databaseManager = new DatabaseMysqlHandler())
         {
             json = databaseManager.Select(mysqlCommand);
         }
@@ -44,7 +44,7 @@ public class Post : ControllerBase
         mysqlCommand.Parameters.AddWithValue("@PostTag", postData.PostTag);
         mysqlCommand.Parameters.AddWithValue("@PostThumbnail", postData.thumbnail);
             
-        using (DatabaseHandler databaseManager = new DatabaseHandler())
+        using (DatabaseMysqlHandler databaseManager = new DatabaseMysqlHandler())
             databaseManager.EditDatabase(mysqlCommand);
         return Ok();
     }
@@ -66,7 +66,7 @@ public class Post : ControllerBase
 
         mysqlCommand.Parameters.AddWithValue("@PostId", postData.postId);
 
-        using (DatabaseHandler databaseManager = new DatabaseHandler())
+        using (DatabaseMysqlHandler databaseManager = new DatabaseMysqlHandler())
             databaseManager.EditDatabase(mysqlCommand);
         return "Deleted";
         
@@ -93,7 +93,7 @@ public class Post : ControllerBase
         mysqlCommand.Parameters.AddWithValue("@Thumbnail", postData.thumbnail);
         mysqlCommand.Parameters.AddWithValue("@PostId", postData.postId);
            
-        using (DatabaseHandler databaseManager = new DatabaseHandler())
+        using (DatabaseMysqlHandler databaseManager = new DatabaseMysqlHandler())
             databaseManager.EditDatabase(mysqlCommand);
         return $"Updated {postData.postId}";
     }
@@ -108,7 +108,7 @@ public class Post : ControllerBase
         MySqlCommand mysqlCommand = new MySqlCommand();
         mysqlCommand.CommandText = query;
 
-        using (DatabaseHandler databaseManager = new DatabaseHandler())
+        using (DatabaseMysqlHandler databaseManager = new DatabaseMysqlHandler())
         {
             json = databaseManager.Select(mysqlCommand);
         }
@@ -128,7 +128,7 @@ public class Post : ControllerBase
 
         mysqlCommand.Parameters.AddWithValue("@PostId", postData.postId);
 
-        using (DatabaseHandler databaseManager = new DatabaseHandler())
+        using (DatabaseMysqlHandler databaseManager = new DatabaseMysqlHandler())
         {
             json = databaseManager.Select(mysqlCommand);
         }
@@ -146,7 +146,7 @@ public class Post : ControllerBase
         MySqlCommand mysqlCommand = new MySqlCommand();
         mysqlCommand.CommandText = query;
 
-        using (DatabaseHandler databaseManager = new DatabaseHandler())
+        using (DatabaseMysqlHandler databaseManager = new DatabaseMysqlHandler())
         {
             json = databaseManager.Select(mysqlCommand);
         }

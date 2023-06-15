@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace webApi.Managers;
 
-public class DatabaseHandler : IDisposable
+public class DatabaseMysqlHandler : IDisposable
 {
     private string username { get; set; }
     private string password { get; set; }
@@ -23,7 +23,7 @@ public class DatabaseHandler : IDisposable
         connection.Close();
     }
 
-    public DatabaseHandler()
+    public DatabaseMysqlHandler()
     {
         Initialize();
     }

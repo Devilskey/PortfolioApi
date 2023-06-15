@@ -25,7 +25,7 @@ public class AppLogin : ControllerBase
 
         mysqlCommand.Parameters.AddWithValue("@AdminName", adminLoginData.AdminName);
 
-        using (DatabaseHandler databaseManger = new DatabaseHandler())
+        using (DatabaseMysqlHandler databaseManger = new DatabaseMysqlHandler())
         {
             json = databaseManger.Select(mysqlCommand);
             json = json.Replace("[", "");
