@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/run/media/devilskeyDev/Backups/vscode/cScharp/webApi/webApi.csproj": {}
+    "C:\\Users\\bhendriks\\OneDrive - KEMBIT\\Bureaublad\\dotnet researh\\PortfolioApi\\webApi.csproj": {}
   },
   "projects": {
-    "/run/media/devilskeyDev/Backups/vscode/cScharp/webApi/webApi.csproj": {
+    "C:\\Users\\bhendriks\\OneDrive - KEMBIT\\Bureaublad\\dotnet researh\\PortfolioApi\\webApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/run/media/devilskeyDev/Backups/vscode/cScharp/webApi/webApi.csproj",
+        "projectUniqueName": "C:\\Users\\bhendriks\\OneDrive - KEMBIT\\Bureaublad\\dotnet researh\\PortfolioApi\\webApi.csproj",
         "projectName": "webApi",
-        "projectPath": "/run/media/devilskeyDev/Backups/vscode/cScharp/webApi/webApi.csproj",
-        "packagesPath": "/root/.nuget/packages/",
-        "outputPath": "/run/media/devilskeyDev/Backups/vscode/cScharp/webApi/obj/",
+        "projectPath": "C:\\Users\\bhendriks\\OneDrive - KEMBIT\\Bureaublad\\dotnet researh\\PortfolioApi\\webApi.csproj",
+        "packagesPath": "C:\\Users\\bhendriks\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bhendriks\\OneDrive - KEMBIT\\Bureaublad\\dotnet researh\\PortfolioApi\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/root/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\bhendriks\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -38,21 +45,29 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.AspNet.WebApi.Core": {
-              "target": "Package",
-              "version": "[5.2.9, )"
-            },
             "Microsoft.AspNet.WebApi.Cors": {
               "target": "Package",
               "version": "[5.2.9, )"
             },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
-              "version": "[1.17.0, )"
+              "version": "[1.18.1, )"
             },
             "MySql.Data": {
               "target": "Package",
-              "version": "[8.0.32, )"
+              "version": "[8.0.33, )"
+            },
+            "Serilog": {
+              "target": "Package",
+              "version": "[2.12.0, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -70,16 +85,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.15, 6.0.15]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.15, 6.0.15]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -88,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/7.0.104/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

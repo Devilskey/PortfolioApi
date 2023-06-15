@@ -2,16 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using webApi.Seeder;
 
-namespace webApi.Controllers
+namespace webApi.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class Seeder : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class Seeder : ControllerBase
+    [HttpGet]
+    public string Seed()
     {
-        [HttpGet]
-        public string Seed()
-        {
-            return SeederDataBase.Seeder();
-        }
+        return SeederDataBase.Seeder();
     }
 }

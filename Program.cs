@@ -1,40 +1,31 @@
-namespace webApi
+
+namespace webApi;
+
+public static class Program
 {
-    public class Program
+    public static async Task Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-            builder.Services.AddCors(options =>
-            {
-            options.AddPolicy("anyCors", Policy =>
-                Policy.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                );
-            });
-
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            builder.Services.AddMemoryCache();
-
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            app.UseSwagger();
-
-            builder.WebHost.UseUrls("http://*:5244");
-            app.UseCors("anyCors");
-
-            app.UseAuthorization();
-
-            app.MapControllers();
-
-            app.Run();
-        }
+        IHost run = CreateHostBuilder(args)
+            .Build();
+        await run.RunAsync();
     }
+
+    private static IHostBuilder CreateHostBuilder(string[] args)
+    {
+        return Host.CreateDefaultBuilder(args)
+            .ConfigureAppConfiguration((hostingContext, config) =>
+            {
+                var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+                config
+                     .AddJsonFile("appsettings.json", false)
+                     .AddJsonFile($"appsettings.{environmentName}.json", true)
+                     .AddJsonFile("serilog.json", false)
+                     .AddJsonFile($"serilog.{environmentName}.json", true)
+                     .AddEnvironmentVariables();
+            })
+            .ConfigureWebHostDefaults(webBuilder =>
+            webBuilder
+                .UseStartup<Startup>());
+    }
+
 }

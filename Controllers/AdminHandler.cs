@@ -4,79 +4,108 @@ using webApi.Types;
 using webApi.Security;
 using MySql.Data.MySqlClient;
 
-namespace webApi.Controllers
+namespace webApi.Controllers;
+
+[ApiController]
+[Route("")]
+public class AdminApi : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class AdminHandler : ControllerBase
+    [Route("AdminHandler")]
+    [HttpPost]
+    public string PostAdmin(Admin admin)
     {
-        [HttpPost]
-        public string PostAdmin(AdminType admin)
-        {
-            if (admin.token == OldToken.token && OldToken.token != ""){
+        if (Token.isExpired())
+            return "Token Expired";
 
-                string HashedPassword = EncryptionHandler.StringHashPassword(admin.AdminPassword);
-                
-                string query = $"INSERT INTO `admin`(`AdminName`, `AdminPassword`, `AdminPhoneNumber`) VALUES (@AdminName, @AdminPassword, @AdminPhoneNumber);";
-                
-                MySqlCommand mysqlCommand = new MySqlCommand();
-                mysqlCommand.CommandText = query;
-
-                mysqlCommand.Parameters.AddWithValue("@AdminName", admin.AdminName);
-                mysqlCommand.Parameters.AddWithValue("@AdminPassword", HashedPassword);
-                mysqlCommand.Parameters.AddWithValue("@AdminPhoneNumber", admin.AdminPhoneNumber);
-                
-                string json = string.Empty;
-                using (DatabaseManager databaseManager = new DatabaseManager()){
-                    databaseManager.Insert(mysqlCommand);
-                }
-                return "inserted into";
-            }
+        if (admin.token != Token.token || Token.token == "")
             return "No Access";
+
+        string HashedPassword = EncryptionHandler.StringHashPassword(admin.AdminPassword);
+            
+        string query = $"INSERT INTO `admin`(`AdminName`, `AdminPassword`, `AdminPhoneNumber`) VALUES (@AdminName, @AdminPassword, @AdminPhoneNumber);";
+            
+        MySqlCommand mysqlCommand = new MySqlCommand();
+        mysqlCommand.CommandText = query;
+
+        mysqlCommand.Parameters.AddWithValue("@AdminName", admin.AdminName);
+        mysqlCommand.Parameters.AddWithValue("@AdminPassword", HashedPassword);
+        mysqlCommand.Parameters.AddWithValue("@AdminPhoneNumber", admin.AdminPhoneNumber);
+
+        using (DatabaseHandler databaseManager = new()){
+            databaseManager.EditDatabase(mysqlCommand);
         }
+        return "inserted into";
+    }
 
-        [HttpDelete]
-        public string DeleteAdmin(AdminType admin)
-        {
-            if (admin.token == OldToken.token && OldToken.token != ""){
-                string query = $"DELETE FROM `admin` WHERE `adminId`=@AdminId;";
+    [Route("AdminHandler")]
+    [HttpDelete]
+    public string DeleteAdmin(Admin admin)
+    {
+        if (Token.isExpired())
+            return "Token Expired";
 
-                MySqlCommand mysqlCommand = new MySqlCommand();
-                mysqlCommand.CommandText = query;
-
-                mysqlCommand.Parameters.AddWithValue("@AdminId", admin.AdminId);
-
-                using (DatabaseManager databaseManager = new DatabaseManager()){
-                    databaseManager.Delete(mysqlCommand);
-                }
-                return "Admin Deleted";
-            }
+        if (admin.token != Token.token || Token.token == "")
             return "No Access";
+
+        string query = $"DELETE FROM `admin` WHERE `adminId`=@AdminId;";
+
+        MySqlCommand mysqlCommand = new MySqlCommand();
+        mysqlCommand.CommandText = query;
+
+        mysqlCommand.Parameters.AddWithValue("@AdminId", admin.AdminId);
+    
+        using (DatabaseHandler databaseManager = new DatabaseHandler()){
+            databaseManager.EditDatabase(mysqlCommand);
         }
+        return "Admin Deleted";
+    }
 
+    [Route("AdminHandler")]
+    [HttpPut]
+    public string PutAdmin(Admin admin)
+    {
+        if (Token.isExpired())
+            return "Token Expired";
 
-        [HttpPut]
-        public string PutAdmin(AdminType admin)
-        {
-            if (admin.token == OldToken.token && OldToken.token != ""){
-                string HashedPassword = EncryptionHandler.StringHashPassword(admin.AdminPassword);
-
-                string query = $"UPDATE `admin` SET `AdminName`=@AdminName,`AdminPassword`=@AdminPassword,`AdminPhoneNumber`=@AdminPhoneNumber WHERE `AdminId`=@AdminId;";
-                
-                MySqlCommand mysqlCommand = new MySqlCommand();
-                mysqlCommand.CommandText = query;
-
-                mysqlCommand.Parameters.AddWithValue("@AdminName", admin.AdminName);
-                mysqlCommand.Parameters.AddWithValue("@AdminPassword", HashedPassword);
-                mysqlCommand.Parameters.AddWithValue("@AdminPhoneNumber", admin.AdminPhoneNumber);
-                mysqlCommand.Parameters.AddWithValue("@AdminId", admin.AdminId);
-
-                using (DatabaseManager databaseManager = new DatabaseManager()){
-                    databaseManager.Update(mysqlCommand);
-                }
-                return "admin Updated";
-            }
+        if (admin.token != Token.token || Token.token == "")
             return "No Access";
+
+        string HashedPassword = EncryptionHandler.StringHashPassword(admin.AdminPassword);
+
+        string query = $"UPDATE `admin` SET `AdminName`=@AdminName,`AdminPassword`=@AdminPassword,`AdminPhoneNumber`=@AdminPhoneNumber WHERE `AdminId`=@AdminId;";
+            
+        MySqlCommand mysqlCommand = new MySqlCommand();
+        mysqlCommand.CommandText = query;
+
+        mysqlCommand.Parameters.AddWithValue("@AdminName", admin.AdminName);
+        mysqlCommand.Parameters.AddWithValue("@AdminPassword", HashedPassword);
+        mysqlCommand.Parameters.AddWithValue("@AdminPhoneNumber", admin.AdminPhoneNumber);
+        mysqlCommand.Parameters.AddWithValue("@AdminId", admin.AdminId);
+
+        using (DatabaseHandler databaseManager = new DatabaseHandler()){
+            databaseManager.EditDatabase(mysqlCommand);
         }
+        return "admin Updated";
+    }
+
+    [Route("AdminMenu")]
+    [HttpPost]
+    public string postMenuAdmin(Authentication auth)
+    {
+        if (Token.isExpired())
+            return "Token Expired";
+
+        if (auth.token != Token.token || Token.token == "")
+            return "No Access";
+        string query = $"SELECT AdminId, AdminName FROM admin;";
+        string json = string.Empty;
+        MySqlCommand mySqlCommand = new MySqlCommand();
+        mySqlCommand.CommandText = query;
+
+        using (DatabaseHandler databaseManager = new DatabaseHandler())
+        {
+            json = databaseManager.Select(mySqlCommand);
+        }
+       return json;
     }
 }

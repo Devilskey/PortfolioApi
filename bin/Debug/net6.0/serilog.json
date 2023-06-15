@@ -1,0 +1,36 @@
+{
+  "Serilog": {
+    "Using": [
+      "Serilog.Sinks.Console"
+    ],
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft.Hosting.Lifetime": "Information",
+        "Microsoft": "Warning"
+      }
+    },
+    "WriteTo": {
+      "Console": {
+        "Name": "Console",
+        "Args": {
+          "restrictedToMinimumLevel": "Information",
+          "outputTemplate": "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{UserName}] {Message:lj}{NewLine}{SlimStackTrace}"
+        }
+      },
+      "File": {
+        "Name": "File",
+        "Args": {
+          "path": "./logs/AlertDefinitions.api.json",
+          "formatter": "Serilog.Formatting.Compact.CompactJsonFormatter, Serilog.Formatting.Compact",
+          "rollingInterval": "Day",
+          "retainedFileCountLimit": 7,
+          "restrictedToMinimumLevel": "Information"
+        }
+      }
+    },
+    "Properties": {
+      "Application": "AlertDefinitions.Api"
+    }
+  }
+}
