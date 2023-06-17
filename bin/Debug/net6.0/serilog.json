@@ -15,22 +15,20 @@
         "Name": "Console",
         "Args": {
           "restrictedToMinimumLevel": "Information",
-          "outputTemplate": "[{Timestamp:HH:mm:ss.fff} {Level:u3}] [{UserName}] {Message:lj}{NewLine}{SlimStackTrace}"
+          "outputTemplate": ""
         }
       },
       "File": {
         "Name": "File",
         "Args": {
-          "path": "./logs/AlertDefinitions.api.json",
+          "path": "./logs/Portfolioapi.json",
           "formatter": "Serilog.Formatting.Compact.CompactJsonFormatter, Serilog.Formatting.Compact",
-          "rollingInterval": "Day",
-          "retainedFileCountLimit": 7,
           "restrictedToMinimumLevel": "Information"
         }
       }
     },
     "Properties": {
-      "Application": "AlertDefinitions.Api"
+      "Application": "webApi"
     }
   }
 }

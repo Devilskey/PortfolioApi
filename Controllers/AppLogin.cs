@@ -12,11 +12,19 @@ namespace webApi.Controllers;
 [Route("[controller]")]
 public class AppLogin : ControllerBase
 {
+    private static ILogger Logger;
+    public AppLogin(ILogger _logger)
+    {
+        Logger = _logger;
+    }
+
     public static AdminData LoginData = new AdminData();
 
     [HttpPost]
     public string LoginCommand(AdminData adminLoginData)
     {
+        Logger.Log(LogLevel.Debug, "TestMassage");
+
         string query = $"SELECT AdminName, AdminPassword FROM admin WHERE AdminName=@AdminName;";
         string json = string.Empty;
         

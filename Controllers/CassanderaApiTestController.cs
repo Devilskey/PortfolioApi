@@ -14,7 +14,6 @@ namespace webApi.Controllers
             using (DatabaseCassandraHandler database = new()) {
                 return database.Select(new CqlCommand());
             }
-            return "";
         }
     }
 }

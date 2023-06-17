@@ -1,4 +1,6 @@
 
+using Serilog;
+
 namespace webApi;
 
 public static class Program
@@ -6,6 +8,7 @@ public static class Program
     public static async Task Main(string[] args)
     {
         IHost run = CreateHostBuilder(args)
+            .UseSerilog()
             .Build();
         await run.RunAsync();
     }
@@ -20,7 +23,6 @@ public static class Program
                      .AddJsonFile("appsettings.json", false)
                      .AddJsonFile($"appsettings.{environmentName}.json", true)
                      .AddJsonFile("serilog.json", false)
-                     .AddJsonFile($"serilog.{environmentName}.json", true)
                      .AddEnvironmentVariables();
             })
             .ConfigureWebHostDefaults(webBuilder =>

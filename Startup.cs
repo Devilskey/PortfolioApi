@@ -1,4 +1,7 @@
-﻿namespace webApi;
+﻿using Serilog;
+using webApi.Extensions;
+
+namespace webApi;
 
 public class Startup
 {
@@ -21,6 +24,7 @@ public class Startup
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+        services.AddSerilogExtension(Configuration);
 
         Console.WriteLine("Configuration Services Done");
     }
@@ -31,6 +35,8 @@ public class Startup
         app.UseSwagger();
         app.UseSwaggerUI();
         app.UseCors("anyCors");
+
+        app.UseSerilogRequestLogging();
 
         app.UseHttpsRedirection();
 
