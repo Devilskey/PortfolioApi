@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ecola\\Documents\\gitkraken\\PortfolioApi\\webApi.csproj": {}
+    "C:\\Users\\bhendriks\\OneDrive - KEMBIT\\Bureaublad\\dotnet researh\\PortfolioApi\\webApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ecola\\Documents\\gitkraken\\PortfolioApi\\webApi.csproj": {
+    "C:\\Users\\bhendriks\\OneDrive - KEMBIT\\Bureaublad\\dotnet researh\\PortfolioApi\\webApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ecola\\Documents\\gitkraken\\PortfolioApi\\webApi.csproj",
+        "projectUniqueName": "C:\\Users\\bhendriks\\OneDrive - KEMBIT\\Bureaublad\\dotnet researh\\PortfolioApi\\webApi.csproj",
         "projectName": "webApi",
-        "projectPath": "C:\\Users\\ecola\\Documents\\gitkraken\\PortfolioApi\\webApi.csproj",
-        "packagesPath": "C:\\Users\\ecola\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ecola\\Documents\\gitkraken\\PortfolioApi\\obj\\",
+        "projectPath": "C:\\Users\\bhendriks\\OneDrive - KEMBIT\\Bureaublad\\dotnet researh\\PortfolioApi\\webApi.csproj",
+        "packagesPath": "C:\\Users\\bhendriks\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bhendriks\\OneDrive - KEMBIT\\Bureaublad\\dotnet researh\\PortfolioApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ecola\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\bhendriks\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -69,6 +69,10 @@
               "target": "Package",
               "version": "[7.0.0, )"
             },
+            "Serilog.Extensions.Logging": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "Serilog.Settings.Configuration": {
               "target": "Package",
               "version": "[7.0.0, )"
@@ -105,7 +109,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
