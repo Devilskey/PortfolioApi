@@ -12,7 +12,8 @@
         "DatabaseName": "c49078dataapi"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5244"
+      "applicationUrl": "http://localhost:5244",
+      "nativeDebugging": false
     },
     "IIS Express": {
       "commandName": "IISExpress",
