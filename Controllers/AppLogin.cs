@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 using webApi.Managers;
 using webApi.Types;

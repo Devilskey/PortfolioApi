@@ -205,8 +205,6 @@ C:\Users\ecola\Documents\gitkraken\PortfolioApi\bin\Debug\net6.0\Serilog.Extensi
 C:\Users\ecola\Documents\gitkraken\PortfolioApi\bin\Debug\net6.0\Serilog.Formatting.Compact.dll
 C:\Users\ecola\Documents\gitkraken\PortfolioApi\bin\Debug\net6.0\Serilog.Settings.Configuration.dll
 C:\Users\ecola\Documents\gitkraken\PortfolioApi\bin\Debug\net6.0\Serilog.Sinks.Debug.dll
-C:\Users\ecola\Documents\gitkraken\PortfolioApi\bin\Debug\net6.0\logs\AlertDefinitions.api20230617.json
-C:\Users\ecola\Documents\gitkraken\PortfolioApi\bin\Debug\net6.0\logs\AlertDefinitions.api.json
 C:\Users\ecola\Documents\gitkraken\PortfolioApi\bin\Debug\net6.0\logs\Portfolioapi.json
 C:\Users\bhendriks\OneDrive - KEMBIT\Bureaublad\dotnet researh\PortfolioApi\bin\Debug\net6.0\Cassandra.dll
 C:\Users\bhendriks\OneDrive - KEMBIT\Bureaublad\dotnet researh\PortfolioApi\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
@@ -231,3 +229,5 @@ C:\Users\bhendriks\OneDrive - KEMBIT\Bureaublad\dotnet researh\PortfolioApi\bin\
 C:\Users\bhendriks\OneDrive - KEMBIT\Bureaublad\dotnet researh\PortfolioApi\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.0\System.Management.dll
 C:\Users\bhendriks\OneDrive - KEMBIT\Bureaublad\dotnet researh\PortfolioApi\obj\Debug\net6.0\webApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\bhendriks\OneDrive - KEMBIT\Bureaublad\dotnet researh\PortfolioApi\obj\Debug\net6.0\webApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ecola\Documents\gitkraken\PortfolioApi\obj\Debug\net6.0\webApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\ecola\Documents\gitkraken\PortfolioApi\obj\Debug\net6.0\webApi.MvcApplicationPartsAssemblyInfo.cache

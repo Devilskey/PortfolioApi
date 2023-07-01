@@ -24,6 +24,7 @@ public class Startup
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+        services.MigrateDatabase(Configuration);
         services.AddSerilogExtension(Configuration);
 
         Console.WriteLine("Configuration Services Done");
