@@ -9,7 +9,7 @@ public static class SeederDataBase
     {
         try
         {
-            using (DatabaseHandler databaseManager = new DatabaseHandler())
+            using (DatabaseMysqlHandler databaseManager = new DatabaseMysqlHandler())
             {
                 databaseManager.SendImport("CREATE TABLE `admin` (\r\n  `AdminId` int(3) NOT NULL,\r\n  `AdminName` varchar(16) NOT NULL,\r\n  `AdminPassword` varchar(32) NOT NULL,\r\n  `AdminPhoneNumber` varchar(10) NOT NULL\r\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;");
                 databaseManager.SendImport("CREATE TABLE `post` (\r\n  `postId` int(10) NOT NULL,\r\n  `PostTitle` varchar(32) NOT NULL,\r\n  `PostContent` longtext NOT NULL,\r\n  `PostTag` varchar(20) NOT NULL,\r\n  `thumbnail` mediumtext NOT NULL\r\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;");

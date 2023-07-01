@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 using webApi.Managers;
 using webApi.Types;
@@ -12,11 +11,19 @@ namespace webApi.Controllers;
 [Route("[controller]")]
 public class AppLogin : ControllerBase
 {
+    private static ILogger Logger;
+    public AppLogin(ILogger _logger)
+    {
+        Logger = _logger;
+    }
+
     public static AdminData LoginData = new AdminData();
 
     [HttpPost]
     public string LoginCommand(AdminData adminLoginData)
     {
+        Logger.Log(LogLevel.Debug, "TestMassage");
+
         string query = $"SELECT AdminName, AdminPassword FROM admin WHERE AdminName=@AdminName;";
         string json = string.Empty;
         
@@ -25,7 +32,7 @@ public class AppLogin : ControllerBase
 
         mysqlCommand.Parameters.AddWithValue("@AdminName", adminLoginData.AdminName);
 
-        using (DatabaseHandler databaseManger = new DatabaseHandler())
+        using (DatabaseMysqlHandler databaseManger = new DatabaseMysqlHandler())
         {
             json = databaseManger.Select(mysqlCommand);
             json = json.Replace("[", "");
