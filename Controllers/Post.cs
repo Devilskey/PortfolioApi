@@ -25,9 +25,9 @@ public class Post : ControllerBase
         return json;
     }
 
-    [Route("PostManager")]
+    [Route("CreateNewPost")]
     [HttpPost]
-    public ActionResult<Types.Post> PostPostCommand(Types.Post postData)
+    public ActionResult<PostObject> CreateNewPost(PostObject postData)
     {
         if (Token.isExpired())
             return BadRequest();
@@ -49,9 +49,9 @@ public class Post : ControllerBase
         return Ok();
     }
 
-    [Route("PostManager")]
+    [Route("DeletePost")]
     [HttpDelete]
-    public string DeletePostCommand(Types.Post postData)
+    public string DeletePostCommand(PostObject postData)
     {
         if (Token.isExpired())
             return "Token Expired";
@@ -69,13 +69,11 @@ public class Post : ControllerBase
         using (DatabaseMysqlHandler databaseManager = new DatabaseMysqlHandler())
             databaseManager.EditDatabase(mysqlCommand);
         return "Deleted";
-        
-
     }
 
-    [Route("PostManager")]
+    [Route("EditPost")]
     [HttpPut]
-    public string EditPostCommand(Types.Post postData)
+    public string EditPost(PostObject postData)
     {
         if (Token.isExpired())
             return "Token Expired";
@@ -83,7 +81,7 @@ public class Post : ControllerBase
         if (postData.Token != Token.token || Token.token == "")
             return $"No token No access";
 
-        string query = $"UPDATE post SET `PostTitle`=@PostTitle, `PostContent`=@PostContent, `thumbnail`=@Thumbnail WHERE `postId`=@PostId;";
+        string query = $"UPDATE post SET `PostTitle`=@PostTitle, `PostContent`=@PostContent, `thumbnail`=@Thumbnail, 'PostTag'=@PostTags WHERE `postId`=@PostId;";
             
         MySqlCommand mysqlCommand = new MySqlCommand();
         mysqlCommand.CommandText = query;
@@ -91,6 +89,7 @@ public class Post : ControllerBase
         mysqlCommand.Parameters.AddWithValue("@PostTitle", postData.PostTitle);
         mysqlCommand.Parameters.AddWithValue("@PostContent", postData.PostContent);
         mysqlCommand.Parameters.AddWithValue("@Thumbnail", postData.thumbnail);
+        mysqlCommand.Parameters.AddWithValue("@PostTags", postData.PostTag);
         mysqlCommand.Parameters.AddWithValue("@PostId", postData.postId);
            
         using (DatabaseMysqlHandler databaseManager = new DatabaseMysqlHandler())
@@ -98,9 +97,9 @@ public class Post : ControllerBase
         return $"Updated {postData.postId}";
     }
 
-    [Route("PostMenu")]
+    [Route("GetPostSimpelData")]
     [HttpGet]
-    public string getCommand()
+    public string GetPostSimpelData()
     {
         string query = $"SELECT postId, PostTitle FROM post;";
         string json = string.Empty;
@@ -116,9 +115,9 @@ public class Post : ControllerBase
         return json;
     }
 
-    [Route("PostMenu")]
+    [Route("GetpostContent")]
     [HttpPost]
-    public string postCommand(Types.Post postData)
+    public string GetpostContent(PostObject postData)
     {
         string query = $"SELECT PostTitle, PostContent, thumbnail FROM post WHERE postId=@PostId;";
         string json = string.Empty;
@@ -136,11 +135,11 @@ public class Post : ControllerBase
         return json;
     }
 
-    [Route("PostMenuSite")]
+    [Route("getListPostsSite")]
     [HttpGet]
-    public string GetCommandSiteMenu()
+    public string getListPostsSite()
     {
-        string query = $"SELECT postId, PostTitle, thumbnail FROM post;";
+        string query = $"SELECT postId, PostTitle, thumbnail, PostTag FROM post;";
         string json = string.Empty;
 
         MySqlCommand mysqlCommand = new MySqlCommand();

@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.AspNetCore.Hosting.Server;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 
 namespace webApi.Managers;
@@ -13,6 +14,7 @@ public class DatabaseMysqlHandler : IDisposable
     private MySqlConnection connection { get; set; }
 
     private static string Worked = "";
+    private bool NoConnectionPossible = false;
 
     public void Dispose()
     {
@@ -23,6 +25,8 @@ public class DatabaseMysqlHandler : IDisposable
         connection.Close();
     }
 
+
+
     public DatabaseMysqlHandler()
     {
         Initialize();
@@ -30,26 +34,30 @@ public class DatabaseMysqlHandler : IDisposable
 
     void Initialize()
     {
-        username = Environment.GetEnvironmentVariable("UsernameDb");
-        password = Environment.GetEnvironmentVariable("PasswordDb");
-        server = Environment.GetEnvironmentVariable("ServerDb");
-        databaseName = Environment.GetEnvironmentVariable("DatabaseName");
+        username = Environment.GetEnvironmentVariable("UsernameDb") ?? "root";
+        password = Environment.GetEnvironmentVariable("PasswordDb") ?? "password";
+        server = Environment.GetEnvironmentVariable("ServerDb") ?? "10.0.0.12";
+        databaseName = Environment.GetEnvironmentVariable("DatabaseName") ?? "SmortTestDb";
 
-        if(username == "" || password == "" || server == "" || databaseName == "")
-        {
-            username = "root";
-            password = "password";
-            server = "127.0.0.1";
-            databaseName = "";
-            System.Console.WriteLine("No Env found");
-        }
-
-        
-        System.Console.WriteLine($"server={server};port=3306;uid={username};pwd={password};database={databaseName};");
+        Console.WriteLine($"server={server};port=3306;uid={username};pwd={password};database={databaseName};");
         connectionString = $"server={server};port=3306;uid={username};pwd={password};database={databaseName};";
         connection = new MySqlConnection(connectionString);
-        connection.Open();
+        try
+        {
+            connection.Open();
+        } catch (Exception ex)
+        {
+            NoConnectionPossible = true;
+        }
         Worked = connection.State.ToString();
+    }
+
+    public bool PingDatabase()
+    {
+        if (NoConnectionPossible)
+            return NoConnectionPossible;
+
+        return connection.Ping();
     }
 
     public string Select(MySqlCommand SqlCommand)
@@ -99,16 +107,21 @@ public class DatabaseMysqlHandler : IDisposable
         return json;
     }
 
-    public void SendImport(string query)
+    public void SendImport(string[] sqlFileContent)
     {
-        MySqlCommand SqlCommand = new MySqlCommand();
-        SqlCommand.CommandText = query;
-        SqlCommand.Connection = connection;
-        try
+        MySqlCommand sqlCommand = new MySqlCommand();
+        foreach (string query in sqlFileContent)
         {
-            SqlCommand.ExecuteNonQuery();
+            sqlCommand.CommandText = query;
+            sqlCommand.Connection = connection;
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
-        catch (Exception)
-        { }
     }
 }

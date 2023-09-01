@@ -1,44 +1,45 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Net.Mail;
+using System.Text;
+using System.Text.Json.Nodes;
 using webApi.Managers;
+using webApi.Object;
 using webApi.Types;
 
 namespace webApi.Controllers;
 
 [ApiController]
-[Route("Site/[controller]")]
+[Route("SendContact")]
 public class ContactForm : ControllerBase
 {
+    private string Webhook = Environment.GetEnvironmentVariable("DiscordWebhook");
+
     [HttpPost]
-    public ActionResult<ContactForm> SendContactmessage(ContactMail contactData)
+    public async Task<ActionResult> SendContactmessageAsync(ContactMail contactData)
     {
-        ContactFormObject contactForm = new ContactFormObject();
-
-        MailMessage mail = new MailMessage();
-        mail.To.Add(contactForm.ToEmail);
-        mail.From = new MailAddress(contactForm.FromMail);
-        mail.Subject = contactData.Subject;
-
-        mail.Body = $" From {contactData.Name},  {contactData.Body}";
-
-        mail.IsBodyHtml = true;
-        using (SmtpClient smtp = new SmtpClient())
+        using (HttpClient client = new HttpClient())
         {
-            smtp.Host = contactForm.SMPTserver; //Or Your SMTP Server Address
-            smtp.Credentials = new System.Net.NetworkCredential
-                 (contactForm.FromMail, contactForm.FromMailPassword);
-            //Or your Smtp Email ID and Password
-            try
+            DiscordWebhookObject webhookObject = new DiscordWebhookObject()
             {
-                smtp.Send(mail);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return BadRequest();
-            }
+                username = contactData.Name,
+                content = $"Subject: {contactData.Subject}   Body: {contactData.Body}"
+            };
+
+            string webhookjson = JsonConvert.SerializeObject(webhookObject);
+
+            Console.WriteLine(webhookjson);
+
+            var content = new StringContent(webhookjson, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PostAsync(Webhook, content); 
+
+            Console.WriteLine(response.StatusCode);
         }
+
+        return Ok();
     }
 }

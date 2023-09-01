@@ -7,12 +7,11 @@ using MySql.Data.MySqlClient;
 namespace webApi.Controllers;
 
 [ApiController]
-[Route("")]
 public class AdminApi : ControllerBase
 {
-    [Route("AdminHandler")]
+    [Route("CreateNewAdmin")]
     [HttpPost]
-    public string PostAdmin(Admin admin)
+    public string CreateNewAdmin(Admin admin)
     {
         if (Token.isExpired())
             return "Token Expired";
@@ -34,10 +33,11 @@ public class AdminApi : ControllerBase
         using (DatabaseMysqlHandler databaseManager = new()){
             databaseManager.EditDatabase(mysqlCommand);
         }
+
         return "inserted into";
     }
 
-    [Route("AdminHandler")]
+    [Route("DeleteAdmin")]
     [HttpDelete]
     public string DeleteAdmin(Admin admin)
     {
@@ -60,7 +60,7 @@ public class AdminApi : ControllerBase
         return "Admin Deleted";
     }
 
-    [Route("AdminHandler")]
+    [Route("EditAdmin")]
     [HttpPut]
     public string PutAdmin(Admin admin)
     {
@@ -88,7 +88,7 @@ public class AdminApi : ControllerBase
         return "admin Updated";
     }
 
-    [Route("AdminMenu")]
+    [Route("GetListAdmin")]
     [HttpPost]
     public string postMenuAdmin(Authentication auth)
     {

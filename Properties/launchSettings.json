@@ -5,11 +5,7 @@
       "launchBrowser": true,
       "launchUrl": "swagger/index.html",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "UsernameDb": "root",
-        "PasswordDb": "password",
-        "ServerDb": "localhost",
-        "DatabaseName": "c49078dataapi"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5244",
@@ -20,11 +16,7 @@
       "launchBrowser": true,
       "launchUrl": "swagger/index.html",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "UsernameDb": "root",
-        "PasswordDb": "password",
-        "ServerDb": "http://localhost:3306/",
-        "DatabaseName": "c49078dataapi"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "Docker": {
