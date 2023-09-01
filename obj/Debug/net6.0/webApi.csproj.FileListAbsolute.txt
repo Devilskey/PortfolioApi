@@ -231,3 +231,4 @@ C:\Users\bhendriks\OneDrive - KEMBIT\Bureaublad\dotnet researh\PortfolioApi\obj\
 C:\Users\bhendriks\OneDrive - KEMBIT\Bureaublad\dotnet researh\PortfolioApi\obj\Debug\net6.0\webApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\ecola\Documents\gitkraken\PortfolioApi\obj\Debug\net6.0\webApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\ecola\Documents\gitkraken\PortfolioApi\obj\Debug\net6.0\webApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ecola\Documents\gitkraken\PortfolioApi\bin\Debug\net6.0\Migrate.sql

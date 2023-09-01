@@ -1,6 +1,6 @@
 ﻿namespace webApi.Types;
 
-public class Post
+public class PostObject
 {
     public string Token { get; set; }
     #nullable enable

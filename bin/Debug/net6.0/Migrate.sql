@@ -1,0 +1,4 @@
+﻿CREATE TABLE IF NOT EXISTS `admin` ( `AdminId` int(3) NOT NULL, `AdminName` varchar(16) NOT NULL,  `AdminPassword` varchar(128) NOT NULL,  `AdminPhoneNumber` varchar(10) NOT NULL,   PRIMARY KEY (`AdminId`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE IF NOT EXISTS `post` (  `postId` int(10) NOT NULL, `PostTitle` varchar(64) NOT NULL,  `PostContent` longtext NOT NULL,  `PostTag` varchar(128) NOT NULL,   `thumbnail` mediumtext NOT NULL,   PRIMARY KEY (`postId`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT IGNORE INTO `admin` (`AdminId`, `AdminName`, `AdminPassword`, `AdminPhoneNumber`) VALUES (0, 'root', 'zlymc9E7NhGNVKfPE66wygEjg793HnE0IbTR/YQfU5o=', '');
+ALTER TABLE `post`  MODIFY `postId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;

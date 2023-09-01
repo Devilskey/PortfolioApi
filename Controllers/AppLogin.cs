@@ -8,21 +8,20 @@ using MySql.Data.MySqlClient;
 namespace webApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("Login")]
 public class AppLogin : ControllerBase
 {
     private static ILogger Logger;
-    public AppLogin(ILogger _logger)
+    public AppLogin(ILogger<AppLogin> _logger)
     {
         Logger = _logger;
     }
 
-    public static AdminData LoginData = new AdminData();
+    public static AdminData[] LoginData = new AdminData[1];
 
     [HttpPost]
     public string LoginCommand(AdminData adminLoginData)
     {
-        Logger.Log(LogLevel.Debug, "TestMassage");
 
         string query = $"SELECT AdminName, AdminPassword FROM admin WHERE AdminName=@AdminName;";
         string json = string.Empty;
@@ -35,13 +34,11 @@ public class AppLogin : ControllerBase
         using (DatabaseMysqlHandler databaseManger = new DatabaseMysqlHandler())
         {
             json = databaseManger.Select(mysqlCommand);
-            json = json.Replace("[", "");
-            json = json.Replace("]", "");
         }
 
         try
         {
-           LoginData = JsonConvert.DeserializeObject<AdminData>(json);
+           LoginData = JsonConvert.DeserializeObject<AdminData[]>(json);
         }
         catch(Exception ex) 
         { 
@@ -55,7 +52,7 @@ public class AppLogin : ControllerBase
 
         string hashedLoginPassword = EncryptionHandler.StringHashPassword(adminLoginData.AdminPassword);
 
-        if (LoginData.AdminName != adminLoginData.AdminName || LoginData.AdminPassword != hashedLoginPassword)
+        if (LoginData[0].AdminName != adminLoginData.AdminName || LoginData[0].AdminPassword != hashedLoginPassword)
         {
             return "no Access granted";
         }

@@ -1,18 +1,22 @@
-﻿using Serilog;
+﻿using webApi.Managers;
+using webApi.Seeder;
 
 namespace webApi.Extensions
 {
     public static class MigrateDatabaseExtension
     {
+        private static string SqlFile = "./Migrate.sql";
+
         public static IServiceCollection MigrateDatabase(this IServiceCollection service, IConfiguration configuration)
         {
-            Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(configuration)
-                .WriteTo.Console()
-                .CreateLogger();
+            using (DatabaseMysqlHandler databaseHandler = new DatabaseMysqlHandler())
+            {
+                string[] sqlContent = File.ReadAllLines(SqlFile);
 
-            service.AddLogging(options => options.AddSerilog());
-            return service;
+                databaseHandler.SendImport(sqlContent);
+
+                return service;
+            }
         }
     }
 }

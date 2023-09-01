@@ -5,7 +5,7 @@ namespace webApi.Managers;
 
 public class TokenHandler 
 {
-    protected static readonly string key = "253f346@sf4";
+    protected static readonly string key = "35S5634@5dE35T53#SDrf";
     public static void TokenGenerator() 
     {
         Token.time = BitConverter.GetBytes(DateTime.UtcNow.ToBinary());
